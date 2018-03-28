@@ -1,0 +1,57 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  text-align: center;
+}
+.color-holder {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 90%;
+  min-width: 300px;
+  max-width: 600px;
+  margin: auto;
+  margin-bottom: 30px;
+}
+
+.color-ball {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 30%;
+  display: inline-block;
+  margin: 0 5px 10px;
+}
+
+.color-value {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 8px;
+  padding: 2px 1px 1px;
+  background: #fff;
+  transform: translateX(-50%) translateY(-50%);
+  border-radius: 3px;
+  opacity: .8;
+  visibility: hidden;
+}
+
+.color-ball:hover {
+  transform: scale(2);
+  z-index: 5;
+}
+
+.color-ball:hover .color-value {
+  visibility: visible;
+}
+
+@media screen and (max-width: 690px) {
+  .color-holder {
+    max-width: 340px;
+  }
+}
