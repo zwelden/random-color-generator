@@ -19,7 +19,7 @@
     var colorFullEl = document.createElement('div');
     colorFullEl.classList.add('color-ball');
     colorFullEl.style.background = colorFull;
-    colorFullEl.innerHTML = '<span class="color-value">' + color + '</span>';
+    colorFullEl.innerHTML = '<span class="color-value">' + colorFull + '</span>';
     colorHolderFullEl.append(colorFullEl);
   }
 
@@ -28,7 +28,7 @@
     var colorLightEl = document.createElement('div');
     colorLightEl.classList.add('color-ball');
     colorLightEl.style.background = colorLight;
-    colorLightEl.innerHTML = '<span class="color-value">' + color + '</span>';
+    colorLightEl.innerHTML = '<span class="color-value">' + colorLight + '</span>';
     colorHolderLightEl.append(colorLightEl);
   }
 
@@ -37,7 +37,7 @@
     var colorSaturatedEl = document.createElement('div');
     colorSaturatedEl.classList.add('color-ball');
     colorSaturatedEl.style.background = colorSaturated;
-    colorSaturatedEl.innerHTML = '<span class="color-value">' + color + '</span>';
+    colorSaturatedEl.innerHTML = '<span class="color-value">' + colorSaturated + '</span>';
     colorHolderSaturatedEl.append(colorSaturatedEl);
   }
 })(window.app = window.app || {});
