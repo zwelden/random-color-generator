@@ -1,4 +1,32 @@
 (function (app) {
+
+  var defaultColorSettings = {
+    hueMin: 0,
+    hueMax: 359, // in hsl circle 360 = 0
+    satMin: 50,
+    satMax: 65,
+    lumMin: 45,
+    lumMax: 60
+  };
+
+  var saturatedColorSettings = {
+    hueMin: 0,
+    hueMax: 359, // in hsl circle 360 = 0
+    satMin: 70,
+    satMax: 100,
+    lumMin: 45,
+    lumMax: 55
+  };
+
+  var lightColorSettings = {
+    hueMin: 0,
+    hueMax: 359, // in hsl circle 360 = 0
+    satMin: 60,
+    satMax: 75,
+    lumMin: 75,
+    lumMax: 85
+  };
+
   /**
   * @param {array} args - min (optional) and max value;
   */
@@ -47,15 +75,23 @@
     return numToHex(num);
   };
 
+  /**
+   * @param {array} colorSetting - color settings to be used for generating the rgb value
+   *    - must contain and hueMin, hueMax, satMin, satMax, lumMin, lumMax
+
+   */
+  var randomHslValueSet = function (colorSettings) {
+    var h = randomNumber(colorSettings.hueMin, colorSettings.hueMax);
+    var s = randomNumber(colorSettings.satMin, colorSettings.satMax);
+    var l = randomNumber(colorSettings.lumMin, colorSettings.lumMax);
+
+    return app.colorConverter.hslToRgb(h, s, l);
+  };
+
   var randomColorDefault = function () {
     var color = '';
-    for (var i = 0; i < 6; i++) {
-      if (i % 2 === 0) {
-        color += randomDefaultHexValue();
-      } else {
-        color += randomHexValue();
-      }
-    }
+    var rgb = randomHslValueSet(defaultColorSettings);
+    color += app.colorConverter.rgbToHex(rgb);
     return '#' + color;
   };
 
@@ -69,28 +105,15 @@
 
   var randomColorLight = function () {
     var color = '';
-    for (var i = 0; i < 6; i++) {
-      if (i % 2 === 0) {
-        color += randomLightHexValue();
-      } else {
-        color += randomHexValue();
-      }
-    }
+    var rgb = randomHslValueSet(lightColorSettings);
+    color += app.colorConverter.rgbToHex(rgb);
     return '#' + color;
   };
 
   var randomColorSaturated = function () {
     var color = '';
-    var saturatedPosition = randomNumber(3);
-    for (var i = 0; i < 3; i++) {
-      for (var j = 0; j < 2; j++) {
-        if (saturatedPosition === i + 1) {
-          color += randomPeakHexValue();
-        } else {
-          color += randomOffPeakHexValue();
-        }
-      }
-    }
+    var rgb = randomHslValueSet(saturatedColorSettings);
+    color += app.colorConverter.rgbToHex(rgb);
     return '#' + color;
   };
 
