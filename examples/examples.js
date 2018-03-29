@@ -3,6 +3,7 @@
   var colorHolderFullEl = document.querySelector('.color-holder-full');
   var colorHolderLightEl = document.querySelector('.color-holder-light');
   var colorHolderSaturatedEl = document.querySelector('.color-holder-saturated');
+  var colorHolderDarkEl = document.querySelector('.color-holder-dark');
   var iterateToNum = 24;
 
   for (var i = 0; i < iterateToNum; i++) {
@@ -39,5 +40,14 @@
     colorSaturatedEl.style.background = colorSaturated;
     colorSaturatedEl.innerHTML = '<span class="color-value">' + colorSaturated + '</span>';
     colorHolderSaturatedEl.append(colorSaturatedEl);
+  }
+
+  for (var n = 0; n < iterateToNum; n++) {
+    var colorDark = app.randomColor('dark');
+    var colorDarkEl = document.createElement('div');
+    colorDarkEl.classList.add('color-ball');
+    colorDarkEl.style.background = colorDark;
+    colorDarkEl.innerHTML = '<span class="color-value">' + colorDark + '</span>';
+    colorHolderDarkEl.append(colorDarkEl);
   }
 })(window.app = window.app || {});

@@ -1,32 +1,4 @@
 (function (app) {
-
-  var defaultColorSettings = {
-    hueMin: 0,
-    hueMax: 359, // in hsl circle 360 = 0
-    satMin: 50,
-    satMax: 65,
-    lumMin: 45,
-    lumMax: 60
-  };
-
-  var saturatedColorSettings = {
-    hueMin: 0,
-    hueMax: 359, // in hsl circle 360 = 0
-    satMin: 70,
-    satMax: 100,
-    lumMin: 45,
-    lumMax: 55
-  };
-
-  var lightColorSettings = {
-    hueMin: 0,
-    hueMax: 359, // in hsl circle 360 = 0
-    satMin: 60,
-    satMax: 75,
-    lumMin: 75,
-    lumMax: 85
-  };
-
   /**
   * @param {array} args - min (optional) and max value;
   */
@@ -55,30 +27,10 @@
     return numToHex(num);
   };
 
-  var randomDefaultHexValue = function () {
-    var num = randomNumber(5, 13);
-    return numToHex(num);
-  };
-
-  var randomLightHexValue = function () {
-    var num = randomNumber(8, 14);
-    return numToHex(num);
-  };
-
-  var randomPeakHexValue = function () {
-    var num = randomNumber(13, 15);
-    return numToHex(num);
-  };
-
-  var randomOffPeakHexValue = function () {
-    var num = randomNumber(0, 7);
-    return numToHex(num);
-  };
-
   /**
    * @param {array} colorSetting - color settings to be used for generating the rgb value
    *    - must contain and hueMin, hueMax, satMin, satMax, lumMin, lumMax
-
+   * @return {array} - rgb color array
    */
   var randomHslValueSet = function (colorSettings) {
     var h = randomNumber(colorSettings.hueMin, colorSettings.hueMax);
@@ -90,7 +42,7 @@
 
   var randomColorDefault = function () {
     var color = '';
-    var rgb = randomHslValueSet(defaultColorSettings);
+    var rgb = randomHslValueSet(app.colorSettings.default);
     color += app.colorConverter.rgbToHex(rgb);
     return '#' + color;
   };
@@ -105,14 +57,21 @@
 
   var randomColorLight = function () {
     var color = '';
-    var rgb = randomHslValueSet(lightColorSettings);
+    var rgb = randomHslValueSet(app.colorSettings.light);
     color += app.colorConverter.rgbToHex(rgb);
     return '#' + color;
   };
 
   var randomColorSaturated = function () {
     var color = '';
-    var rgb = randomHslValueSet(saturatedColorSettings);
+    var rgb = randomHslValueSet(app.colorSettings.saturated);
+    color += app.colorConverter.rgbToHex(rgb);
+    return '#' + color;
+  };
+
+  var randomColorDark = function () {
+    var color = '';
+    var rgb = randomHslValueSet(app.colorSettings.dark);
     color += app.colorConverter.rgbToHex(rgb);
     return '#' + color;
   };
@@ -125,6 +84,8 @@
       return randomColorLight();
     } else if (type === 'saturated') {
       return randomColorSaturated();
+    } else if (type === 'dark') {
+      return randomColorDark();
     }
     return randomColorDefault();
   };
