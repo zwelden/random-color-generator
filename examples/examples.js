@@ -1,53 +1,34 @@
 (function (app) {
-  var colorHolderDefaultEl = document.querySelector('.color-holder-default');
-  var colorHolderFullEl = document.querySelector('.color-holder-full');
-  var colorHolderLightEl = document.querySelector('.color-holder-light');
-  var colorHolderSaturatedEl = document.querySelector('.color-holder-saturated');
-  var colorHolderDarkEl = document.querySelector('.color-holder-dark');
-  var iterateToNum = 24;
+  var colorTests = [
+    {element: '.color-holder-default', color: 'default'},
+    {element: '.color-holder-full', color: 'full'},
+    {element: '.color-holder-light', color: 'light'},
+    {element: '.color-holder-saturated', color: 'saturated'},
+    {element: '.color-holder-desaturated', color: 'desaturated'},
+    {element: '.color-holder-dark', color: 'dark'},
+    {element: '.color-holder-ultralight', color: 'ultralight'},
+    {element: '.color-holder-red', color: 'red'},
+    {element: '.color-holder-green', color: 'green'},
+    {element: '.color-holder-blue', color: 'blue'}
+  ];
 
-  for (var i = 0; i < iterateToNum; i++) {
-    var color = app.randomColor();
-    var colorEl = document.createElement('div');
-    colorEl.classList.add('color-ball');
-    colorEl.style.background = color;
-    colorEl.innerHTML = '<span class="color-value">' + color + '</span>';
-    colorHolderDefaultEl.append(colorEl);
-  }
+  var iterateToNum = 18;
 
-  for (var j = 0; j < iterateToNum; j++) {
-    var colorFull = app.randomColor('full');
-    var colorFullEl = document.createElement('div');
-    colorFullEl.classList.add('color-ball');
-    colorFullEl.style.background = colorFull;
-    colorFullEl.innerHTML = '<span class="color-value">' + colorFull + '</span>';
-    colorHolderFullEl.append(colorFullEl);
-  }
+  var generateRandomColorBlocks = function () {
+    for (var i = 0; i < colorTests.length; i++) {
+      var wrapperEl = document.querySelector(colorTests[i].element);
+      var colorType = colorTests[i].color;
 
-  for (var k = 0; k < iterateToNum; k++) {
-    var colorLight = app.randomColor('light');
-    var colorLightEl = document.createElement('div');
-    colorLightEl.classList.add('color-ball');
-    colorLightEl.style.background = colorLight;
-    colorLightEl.innerHTML = '<span class="color-value">' + colorLight + '</span>';
-    colorHolderLightEl.append(colorLightEl);
-  }
+      for (var j = 0; j < iterateToNum; j++) {
+        var colorHex = app.randomColor(colorType);
+        var colorEl = document.createElement('div');
+        colorEl.classList.add('color-ball');
+        colorEl.style.background = colorHex;
+        colorEl.innerHTML = '<span class="color-value">' + colorHex + '</span>';
+        wrapperEl.append(colorEl);
+      }
+    }
+  };
 
-  for (var m = 0; m < iterateToNum; m++) {
-    var colorSaturated = app.randomColor('saturated');
-    var colorSaturatedEl = document.createElement('div');
-    colorSaturatedEl.classList.add('color-ball');
-    colorSaturatedEl.style.background = colorSaturated;
-    colorSaturatedEl.innerHTML = '<span class="color-value">' + colorSaturated + '</span>';
-    colorHolderSaturatedEl.append(colorSaturatedEl);
-  }
-
-  for (var n = 0; n < iterateToNum; n++) {
-    var colorDark = app.randomColor('dark');
-    var colorDarkEl = document.createElement('div');
-    colorDarkEl.classList.add('color-ball');
-    colorDarkEl.style.background = colorDark;
-    colorDarkEl.innerHTML = '<span class="color-value">' + colorDark + '</span>';
-    colorHolderDarkEl.append(colorDarkEl);
-  }
+  generateRandomColorBlocks();
 })(window.app = window.app || {});

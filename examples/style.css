@@ -7,15 +7,29 @@ html, body {
 h1, h2, h3, h4, h5, h6 {
   text-align: center;
 }
+
+.color-blocks-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-left: 20px;
+  padding-right: 20px;
+  max-width: 1200px;
+}
+
+.color-block-wrapper {
+  max-width: 300px;
+  padding: 0 20px;
+}
+
 .color-holder {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
-  width: 90%;
-  min-width: 300px;
-  max-width: 600px;
   margin: auto;
+  width: 100%;
   margin-bottom: 30px;
 }
 

@@ -7,6 +7,17 @@
     var min = 0;
     if (arguments.length === 1) {
       max = arguments[0];
+    } else if (arguments.length === 4) {
+      var min1 = arguments[0];
+      var max1 = arguments[1];
+      var min2 = arguments[2];
+      var max2 = arguments[3];
+      var highLow = Math.round(Math.random());
+      if (highLow === 0) {
+        return Math.floor(Math.random() * (max1 - min1 + 1) + min1);
+      } else {
+        return Math.floor(Math.random() * (max2 - min2 + 1) + min2);
+      }
     } else {
       min = arguments[0];
       max = arguments[1];
@@ -40,11 +51,12 @@
     return app.colorConverter.hslToRgb(h, s, l);
   };
 
-  var randomColorDefault = function () {
-    var color = '';
-    var rgb = randomHslValueSet(app.colorSettings.default);
-    color += app.colorConverter.rgbToHex(rgb);
-    return '#' + color;
+  var randomRedHslValueSet = function (colorSettings) {
+    var h = randomNumber(colorSettings.hueMin1, colorSettings.hueMax1, colorSettings.hueMin2, colorSettings.hueMax2);
+    var s = randomNumber(colorSettings.satMin, colorSettings.satMax);
+    var l = randomNumber(colorSettings.lumMin, colorSettings.lumMax);
+
+    return app.colorConverter.hslToRgb(h, s, l);
   };
 
   var randomColorFull = function () {
@@ -55,39 +67,25 @@
     return '#' + color;
   };
 
-  var randomColorLight = function () {
+  var generateRandomColor = function (type) {
     var color = '';
-    var rgb = randomHslValueSet(app.colorSettings.light);
-    color += app.colorConverter.rgbToHex(rgb);
-    return '#' + color;
-  };
-
-  var randomColorSaturated = function () {
-    var color = '';
-    var rgb = randomHslValueSet(app.colorSettings.saturated);
-    color += app.colorConverter.rgbToHex(rgb);
-    return '#' + color;
-  };
-
-  var randomColorDark = function () {
-    var color = '';
-    var rgb = randomHslValueSet(app.colorSettings.dark);
+    var rgb;
+    if (type === 'red') {
+      rgb = randomRedHslValueSet(app.colorSettings.red);
+    } else {
+      rgb = randomHslValueSet(app.colorSettings[type]);
+    }
     color += app.colorConverter.rgbToHex(rgb);
     return '#' + color;
   };
 
   var randomColor = function (type) {
-    type = (type == null) ? 'defualt' : type.toLowerCase();
+    type = (type == null) ? 'default' : type.toLowerCase();
     if (type === 'full') {
       return randomColorFull();
-    } else if (type === 'light') {
-      return randomColorLight();
-    } else if (type === 'saturated') {
-      return randomColorSaturated();
-    } else if (type === 'dark') {
-      return randomColorDark();
+    } else {
+      return generateRandomColor(type);
     }
-    return randomColorDefault();
   };
 
   app.randomColor = randomColor;
