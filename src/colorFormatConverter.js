@@ -47,7 +47,7 @@
      * Converts an RGB color value to HSL. Conversion formula
      * adapted from http://en.wikipedia.org/wiki/HSL_color_space.
      * Assumes r, g, and b are contained in the set [0, 255] and
-     * returns h, s, and l in the set [0, 1].
+     * returns h between [0, 360), s, and l in the set [0, 100].
      *
      * @param   {number}  r       The red color value
      * @param   {number}  g       The green color value
@@ -77,9 +77,11 @@
         h /= 6;
       }
 
+      h = Math.floor(h * 360);
+      s = Math.round(s * 100);
+      l = Math.round(l * 100);
       return [h, s, l];
     };
-
 
     /**
      * @param {array} rgb - an rgb color array
@@ -102,10 +104,41 @@
       return hexR + hexG + hexB;
     };
 
+    /**
+     * @param {string} hexValue - a hexValue formated '#nnnnnn', where 0 <= n <= F
+     *
+     * @return {array} - array of three values between [0, 255] inclusive
+     */
+    var hexToRgb = function (hexValue) {
+      var hexSplit = hexValue.split('#');
+      var hexNum = hexSplit[1];
+      var hexR = hexNum.slice(0, 2);
+      var hexG = hexNum.slice(2, 4);
+      var hexB = hexNum.slice(4, 6);
+
+      var r = parseInt(hexR, 16);
+      var g = parseInt(hexG, 16);
+      var b = parseInt(hexB, 16);
+
+      return [r, g, b];
+    };
+
+    /**
+     * @param {string} hexValue - a hexValue formated '#nnnnnn', where 0 <= n <= F
+     *
+     * @return {array} - array of three values between [0, 255] inclusive
+     */
+    var hexToHsl = function (hexValue) {
+      var rgb = hexToRgb(hexValue);
+      return rgbToHsl(rgb[0], rgb[1], rgb[2]);
+    };
+
     return {
       hslToRgb: hslToRgb,
       rgbToHsl: rgbToHsl,
-      rgbToHex: rgbToHex
+      rgbToHex: rgbToHex,
+      hexToRgb: hexToRgb,
+      hexToHsl: hexToHsl
     };
   };
 

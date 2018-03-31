@@ -25,6 +25,18 @@
     return Math.floor(Math.random() * (max - min + 1) + min);
   };
 
+  var randomRadian = function (minRadian, maxRadian) {
+    return Math.random() * (maxRadian - minRadian + 1) + minRadian;
+  };
+
+  var radianToDegree = function (radians) {
+    return Math.floor(radians * (180 / Math.PI));
+  };
+
+  var degreeToRadians = function (degrees) {
+    return degrees * (Math.PI / 180);
+  };
+
   /**
   * @param {int} num - number to covert to a hex value
   */
@@ -67,10 +79,50 @@
     return '#' + color;
   };
 
+  var minMaxFromValue = function (value) {
+    var min;
+    var max;
+    var diff;
+    if (value <= 90 && value >= 10) {
+      min = value - 10;
+      max = value + 10;
+    } else if (value > 90) {
+      diff = 100 - value;
+      min = value - (20 - diff);
+      max = 100;
+    } else if (value < 10) {
+      min = 0;
+      max = value + (20 - value);
+    }
+    return [min, max];
+  };
+
+  var randomColorFromGiven = function (hexValue) {
+    var hsl = app.colorConverter.hexToHsl(hexValue);
+    var hueInRad = degreeToRadians(hsl[0]);
+    var hueMinRad = hueInRad - 0.15;
+    var hueMaxRad = hueInRad + 0.15;
+    var satMinMax = minMaxFromValue(hsl[1]);
+    var satMin = satMinMax[0];
+    var satMax = satMinMax[1];
+    var lumMinMax = minMaxFromValue(hsl[2]);
+    var lumMin = lumMinMax[0];
+    var lumMax = lumMinMax[1];
+
+    var hRad = randomRadian(hueMinRad, hueMaxRad);
+    var h = radianToDegree(hRad);
+    var s = randomNumber(satMin, satMax);
+    var l = randomNumber(lumMin, lumMax);
+
+    return app.colorConverter.hslToRgb(h, s, l);
+  };
+
   var generateRandomColor = function (type) {
     var color = '';
     var rgb;
-    if (type === 'red') {
+    if (type.charAt(0) === '#' && type.length === 7) {
+      rgb = randomColorFromGiven(type);
+    } else if (type === 'red') {
       rgb = randomRedHslValueSet(app.colorSettings.red);
     } else {
       rgb = randomHslValueSet(app.colorSettings[type]);

@@ -9,7 +9,8 @@
     {element: '.color-holder-ultralight', color: 'ultralight'},
     {element: '.color-holder-red', color: 'red'},
     {element: '.color-holder-green', color: 'green'},
-    {element: '.color-holder-blue', color: 'blue'}
+    {element: '.color-holder-blue', color: 'blue'},
+    {element: '.color-holder-hex1', color: '#C94436'}
   ];
 
   var iterateToNum = 18;
