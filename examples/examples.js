@@ -12,7 +12,8 @@
     {element: '.color-holder-red', color: 'red'},
     {element: '.color-holder-green', color: 'green'},
     {element: '.color-holder-blue', color: 'blue'},
-    {element: '.color-holder-yellow', color: 'yellow'}
+    {element: '.color-holder-yellow', color: 'yellow'},
+    {element: '.color-holder-grayscale', color: 'grayscale'}
   ];
 
   var iterateToNum = 18;

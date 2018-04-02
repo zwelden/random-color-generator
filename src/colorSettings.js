@@ -60,7 +60,7 @@
     },
     green: {
       hueMin: 110,
-      hueMax: 130, // in hsl circle 360 = 0\
+      hueMax: 130, // in hsl circle 360 = 0
       satMin: 30,
       satMax: 85,
       lumMin: 20,
@@ -68,7 +68,7 @@
     },
     blue: {
       hueMin: 225,
-      hueMax: 255, // in hsl circle 360 = 0\
+      hueMax: 255, // in hsl circle 360 = 0
       satMin: 30,
       satMax: 85,
       lumMin: 20,
@@ -76,11 +76,19 @@
     },
     yellow: {
       hueMin: 42,
-      hueMax: 63, // in hsl circle 360 = 0\
+      hueMax: 63, // in hsl circle 360 = 0
       satMin: 65,
       satMax: 100,
       lumMin: 45,
       lumMax: 80
+    },
+    grayscale: {
+      hueMin: 0,
+      hueMax: 1, // in hsl circle 360 = 0
+      satMin: 0,
+      satMax: 0,
+      lumMin: 0,
+      lumMax: 100
     }
   };
 })(window.app = window.app || {});
