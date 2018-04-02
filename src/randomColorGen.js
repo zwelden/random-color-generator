@@ -100,8 +100,8 @@
   var randomColorFromGiven = function (hexValue) {
     var hsl = app.colorConverter.hexToHsl(hexValue);
     var hueInRad = degreeToRadians(hsl[0]);
-    var hueMinRad = hueInRad - 0.15;
-    var hueMaxRad = hueInRad + 0.15;
+    var hueMinRad = hueInRad - 0.1;
+    var hueMaxRad = hueInRad + 0.1;
     var satMinMax = minMaxFromValue(hsl[1]);
     var satMin = satMinMax[0];
     var satMax = satMinMax[1];

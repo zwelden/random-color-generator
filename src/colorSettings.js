@@ -73,6 +73,14 @@
       satMax: 85,
       lumMin: 20,
       lumMax: 85
+    },
+    yellow: {
+      hueMin: 42,
+      hueMax: 63, // in hsl circle 360 = 0\
+      satMin: 65,
+      satMax: 100,
+      lumMin: 45,
+      lumMax: 80
     }
   };
 })(window.app = window.app || {});
